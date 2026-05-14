@@ -19,13 +19,27 @@ mel_basis = librosa_mel_fn(sr=22050, n_fft=1024, n_mels=80, fmin=0, fmax=8000)
 class DiffVC:
     """DiffVC inference wrapper."""
 
-    def __init__(self, device="cuda", checkpoint_path=None):
+    def __init__(self, device="cuda", checkpoint_path=None, checkpoint_dir=None):
         self.device = device
         self.sr = params.sampling_rate
 
-        # Download or use provided checkpoint
-        if checkpoint_path is None:
-            checkpoint_path = hf_hub_download("DinoMan/Diff-VC", "vc_libritts_wodyn.pt")
+        if checkpoint_dir:
+            checkpoint_path = checkpoint_path or os.path.join(checkpoint_dir, "vc/vc_libritts_wodyn.pt")
+            hfg_config_path = os.path.join(checkpoint_dir, "vocoder/config.json")
+            hfg_ckpt_path = os.path.join(checkpoint_dir, "vocoder/generator")
+            spk_ckpt_path = os.path.join(checkpoint_dir, "spk_encoder/pretrained.pt")
+        else:
+            # Download or use provided checkpoint
+            if checkpoint_path is None:
+                try:
+                    checkpoint_path = hf_hub_download("DinoMan/Diff-VC", "vc_libritts_wodyn.pt")
+                except Exception:
+                    raise FileNotFoundError(
+                        "DiffVC checkpoints not found. Please provide checkpoint_dir or upload to DinoMan/Diff-VC on HuggingFace."
+                    )
+            hfg_config_path = hf_hub_download("DinoMan/Diff-VC", "vocoder/config.json")
+            hfg_ckpt_path = hf_hub_download("DinoMan/Diff-VC", "vocoder/generator")
+            spk_ckpt_path = hf_hub_download("DinoMan/Diff-VC", "spk_encoder/pretrained.pt")
 
         # Load DiffVC model
         self.generator = DiffVCModel(
@@ -38,9 +52,6 @@ class DiffVC:
         self.generator.eval()
 
         # Load HiFi-GAN vocoder
-        hfg_config_path = hf_hub_download("DinoMan/Diff-VC", "vocoder/config.json")
-        hfg_ckpt_path = hf_hub_download("DinoMan/Diff-VC", "vocoder/generator")
-
         from .hifigan.env import AttrDict
         from .hifigan.models import Generator as HiFiGAN
 
@@ -52,7 +63,6 @@ class DiffVC:
         self.hifigan.remove_weight_norm()
 
         # Load speaker encoder
-        spk_ckpt_path = hf_hub_download("DinoMan/Diff-VC", "spk_encoder/pretrained.pt")
         from .speaker_encoder.encoder import inference as spk_encoder
         spk_encoder.load_model(Path(spk_ckpt_path), device=device)
         self.spk_encoder = spk_encoder

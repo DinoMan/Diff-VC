@@ -10,7 +10,7 @@ use_gpu = torch.cuda.is_available()
 import librosa
 from librosa.core import load
 from librosa.filters import mel as librosa_mel_fn
-mel_basis = librosa_mel_fn(22050, 1024, 80, 0, 8000)
+mel_basis = librosa_mel_fn(sr=22050, n_fft=1024, n_mels=80, fmin=0, fmax=8000)
 
 from . import params
 from .model import DiffVC

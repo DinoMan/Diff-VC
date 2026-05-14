@@ -10,7 +10,18 @@ import librosa
 import struct
 
 import torch
-from torchaudio.transforms import Resample
+from torch.nn import Module
+import torch
+import torch.nn.functional as F
+
+class Resample(Module):
+    def __init__(self, orig_freq, new_freq):
+        super().__init__()
+        self.orig_freq = orig_freq
+        self.new_freq = new_freq
+    def forward(self, x):
+        ratio = self.new_freq / self.orig_freq
+        return F.interpolate(x.unsqueeze(0), scale_factor=ratio, mode="linear", align_corners=False).squeeze(0)
 from librosa.filters import mel as librosa_mel_fn
 
 

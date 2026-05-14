@@ -45,7 +45,7 @@ class PseudoInversion(BaseModule):
         self.n_mels = n_mels
         self.sampling_rate = sampling_rate
         self.n_fft = n_fft
-        mel_basis = librosa_mel_fn(sampling_rate, n_fft, n_mels, 0, 8000)
+        mel_basis = librosa_mel_fn(sr=sampling_rate, n_fft=n_fft, n_mels=n_mels, fmin=0, fmax=8000)
         mel_basis_inverse = np.linalg.pinv(mel_basis)
         mel_basis_inverse = torch.from_numpy(mel_basis_inverse).float()
         self.register_buffer("mel_basis_inverse", mel_basis_inverse)

@@ -8,11 +8,11 @@
 
 import torch
 
-from model.base import BaseModule
-from model.encoder import MelEncoder
-from model.postnet import PostNet
-from model.diffusion import Diffusion
-from model.utils import sequence_mask, fix_len_compatibility, mse_loss
+from .base import BaseModule
+from .encoder import MelEncoder
+from .postnet import PostNet
+from .diffusion import Diffusion
+from .utils import sequence_mask, fix_len_compatibility, mse_loss
 
 
 # "average voice" encoder as the module parameterizing the diffusion prior

@@ -1,10 +1,10 @@
 """ from https://github.com/CorentinJ/Real-Time-Voice-Cloning """
 
-from encoder.params_data import *
-from encoder.model import SpeakerEncoder
-from encoder.audio import preprocess_wav, preprocess_wav_batch
+from .params_data import *
+from .model import SpeakerEncoder
+from .audio import preprocess_wav, preprocess_wav_batch
 from matplotlib import cm
-from encoder import audio
+from . import audio
 from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np

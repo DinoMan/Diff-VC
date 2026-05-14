@@ -11,7 +11,7 @@ import torchaudio
 import numpy as np
 from librosa.filters import mel as librosa_mel_fn
 
-from model.base import BaseModule
+from .base import BaseModule
 
 
 def mse_loss(x, y, mask, n_feats):

@@ -1,7 +1,7 @@
 """ from https://github.com/CorentinJ/Real-Time-Voice-Cloning """
 
 from scipy.ndimage.morphology import binary_dilation
-from encoder.params_data import *
+from .params_data import *
 from pathlib import Path
 from typing import Optional, Union
 import numpy as np

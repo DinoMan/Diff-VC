@@ -9,9 +9,9 @@
 import math
 import torch
 
-from model.base import BaseModule
-from model.modules import Mish, Upsample, Downsample, Rezero, Block, ResnetBlock
-from model.modules import LinearAttention, Residual, SinusoidalPosEmb, RefBlock
+from .base import BaseModule
+from .modules import Mish, Upsample, Downsample, Rezero, Block, ResnetBlock
+from .modules import LinearAttention, Residual, SinusoidalPosEmb, RefBlock
 
 
 class GradLogPEstimator(BaseModule):

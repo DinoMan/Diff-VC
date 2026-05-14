@@ -9,8 +9,8 @@
 import math
 import torch
 
-from model.base import BaseModule
-from model.utils import convert_pad_shape
+from .base import BaseModule
+from .utils import convert_pad_shape
 
 
 class LayerNorm(BaseModule):

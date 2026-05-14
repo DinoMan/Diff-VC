@@ -8,8 +8,8 @@
 
 import torch
 
-from model.base import BaseModule
-from model.modules import Mish
+from .base import BaseModule
+from .modules import Mish
 
 
 class Block(BaseModule):

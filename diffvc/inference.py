@@ -12,16 +12,16 @@ from librosa.core import load
 from librosa.filters import mel as librosa_mel_fn
 mel_basis = librosa_mel_fn(22050, 1024, 80, 0, 8000)
 
-import params
-from model import DiffVC
+from . import params
+from .model import DiffVC
 
 import sys
-sys.path.append('hifi-gan/')
-from env import AttrDict
-from models import Generator as HiFiGAN
+# removed sys.path hack
+from .hifigan.env import AttrDict
+from .hifigan.models import Generator as HiFiGAN
 
-sys.path.append('speaker_encoder/')
-from encoder import inference as spk_encoder
+# removed sys.path hack
+from .speaker_encoder.encoder import inference as spk_encoder
 from pathlib import Path
 
 

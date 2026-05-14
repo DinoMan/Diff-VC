@@ -1,7 +1,7 @@
 """ from https://github.com/CorentinJ/Real-Time-Voice-Cloning """
 
-from encoder.data_objects.random_cycler import RandomCycler
-from encoder.data_objects.utterance import Utterance
+from .data_objects.random_cycler import RandomCycler
+from .data_objects.utterance import Utterance
 from pathlib import Path
 
 # Contains the set of utterances of a single speaker

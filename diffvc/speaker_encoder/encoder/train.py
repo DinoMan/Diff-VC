@@ -1,9 +1,9 @@
 """ from https://github.com/CorentinJ/Real-Time-Voice-Cloning """
 
-from encoder.visualizations import Visualizations
-from encoder.data_objects import SpeakerVerificationDataLoader, SpeakerVerificationDataset
-from encoder.params_model import *
-from encoder.model import SpeakerEncoder
+from .visualizations import Visualizations
+from .data_objects import SpeakerVerificationDataLoader, SpeakerVerificationDataset
+from .params_model import *
+from .model import SpeakerEncoder
 from utils.profiler import Profiler
 from pathlib import Path
 import torch

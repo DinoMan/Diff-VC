@@ -1,0 +1,19 @@
+[project]
+name = "diffvc"
+version = "0.1.0"
+description = "DiffVC: Diffusion-Based Voice Conversion"
+requires-python = ">=3.10"
+dependencies = [
+    "torch>=2.0.0",
+    "librosa>=0.10.0",
+    "soundfile>=0.12.0",
+    "numpy<2.0",
+    "huggingface-hub",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["diffvc*"]
